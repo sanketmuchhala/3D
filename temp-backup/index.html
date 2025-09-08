@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sanket Muchhala - 3D Interactive Portfolio</title>
+    <meta name="description" content="Explore Sanket Muchhala's AI/ML engineering portfolio in an immersive 3D bedroom environment. Discover projects, skills, and experience through interactive objects.">
+    <meta property="og:title" content="Sanket Muchhala - 3D Interactive Portfolio">
+    <meta property="og:description" content="Experience AI/ML engineering expertise in a stunning 3D interactive environment">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="./assets/images/portfolio-preview.jpg">
+    
+    <link rel="stylesheet" href="./css/styles.css">
+    <link rel="stylesheet" href="./css/modals.css">
+    <link rel="stylesheet" href="./css/responsive.css">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body>
+    <div id="loading-screen">
+        <div class="loading-container">
+            <div class="loading-spinner"></div>
+            <h2>Loading Sanket's 3D Portfolio</h2>
+            <div class="loading-progress">
+                <div class="progress-bar" id="progress-bar"></div>
+            </div>
+            <p id="loading-text">Initializing scene...</p>
+        </div>
+    </div>
+
+    <div id="canvas-container">
+        <canvas id="three-canvas"></canvas>
+    </div>
+
+    <div id="ui-overlay">
+        <div class="top-bar">
+            <h1>Sanket Muchhala</h1>
+            <p>AI/ML Engineer Portfolio</p>
+        </div>
+        
+        <div class="instructions" id="instructions">
+            <p>Click objects to explore my portfolio</p>
+            <div class="controls">
+                <span>🖱️ Click & Drag to rotate</span>
+                <span>🔍 Scroll to zoom</span>
+                <span>📱 Touch to interact</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal System -->
+    <div id="modal-overlay" class="modal-overlay">
+        <div class="modal-content">
+            <button class="modal-close" id="modal-close">&times;</button>
+            <div id="modal-body"></div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="./js/content.js"></script>
+    <script src="./js/utils.js"></script>
+    <script src="./js/models.js"></script>
+    <script src="./js/interactions.js"></script>
+    <script src="./js/animations.js"></script>
+    <script src="./js/main.js"></script>
+</body>
+</html>
