@@ -1,0 +1,133 @@
+{
+  "personal": {
+    "name": "Sanket Muchhala",
+    "title": "AI/ML Engineer",
+    "summary": "AI/ML Engineer with 3+ years of experience specializing in generative AI, LLMs, and NLP. Expert in agentic systems, document intelligence workflows, ML pipelines with focus on automation and data-backed insights across insurance, esports, enterprise analytics.",
+    "email": "sanket.muchhala@example.com",
+    "github": "https://github.com/sanketmuchhala",
+    "linkedin": "https://linkedin.com/in/sanketmuchhala",
+    "website": "https://sanketmuchhala.github.io"
+  },
+  "projects": [
+    {
+      "id": "ai-learning-assistant",
+      "name": "AI Learning Assistant",
+      "description": "Intelligent study scheduler with adaptive learning and interview prep capabilities.",
+      "details": "Built an AI-powered learning assistant that adapts to individual learning patterns and schedules study sessions for maximum retention. Features include spaced repetition, difficulty adjustment, and interview preparation modules.",
+      "tech": ["Python", "NLP", "Machine Learning", "TensorFlow", "FastAPI"],
+      "github": "#",
+      "demo": "#",
+      "impact": "Improved study efficiency by 40% for beta users"
+    },
+    {
+      "id": "job-automation-tool",
+      "name": "Job Application Automation Tool",
+      "description": "DeepSeek AI-powered semantic matching system for automated job applications.",
+      "details": "Developed an intelligent job application system that uses semantic matching to identify relevant opportunities and automatically customize applications. Leverages DeepSeek's cost-effective API for high-volume processing.",
+      "tech": ["DeepSeek API", "Python", "Automation", "Web Scraping", "NLP"],
+      "github": "#",
+      "demo": "#",
+      "cost": "$0.14 per 1M tokens",
+      "impact": "Reduced job application time by 80% while maintaining personalization"
+    },
+    {
+      "id": "aws-geospatial",
+      "name": "AWS Serverless Geospatial Solution",
+      "description": "Serverless architecture using S3/Lambda with OpenStreetMap integration.",
+      "details": "Built a scalable geospatial data processing pipeline using AWS serverless architecture. Processes location data, performs spatial analysis, and provides real-time mapping services.",
+      "tech": ["AWS Lambda", "S3", "OpenStreetMap", "JavaScript", "API Gateway"],
+      "github": "#",
+      "demo": "#",
+      "impact": "99% uptime, processing 10M+ geospatial queries monthly"
+    },
+    {
+      "id": "ai-brain-blog",
+      "name": "AI vs Human Brain Analysis",
+      "description": "Comprehensive analysis exploring differences between AI and human cognition.",
+      "details": "Deep dive research into AI cognition differences, exploring neural networks vs biological neurons, learning mechanisms, and consciousness implications.",
+      "tech": ["Research", "Technical Writing", "Data Visualization", "Cognitive Science"],
+      "github": "#",
+      "demo": "#",
+      "impact": "10K+ readers, featured in AI research communities"
+    }
+  ],
+  "skills": {
+    "ai_ml": [
+      "Generative AI",
+      "Large Language Models (LLMs)",
+      "Natural Language Processing",
+      "Document Intelligence",
+      "Agentic Systems",
+      "Machine Learning Pipelines",
+      "Deep Learning",
+      "Computer Vision"
+    ],
+    "cloud_tech": [
+      "Amazon Web Services (AWS)",
+      "Microsoft Azure",
+      "Serverless Architecture",
+      "Lambda Functions",
+      "API Gateway",
+      "S3 Storage",
+      "CloudFormation"
+    ],
+    "programming": [
+      "Python",
+      "JavaScript",
+      "TensorFlow",
+      "PyTorch",
+      "FastAPI",
+      "React",
+      "Node.js",
+      "SQL"
+    ],
+    "specialties": [
+      "Automation Systems",
+      "Data Analytics",
+      "ML Model Deployment",
+      "ETL Pipelines",
+      "API Development",
+      "System Architecture"
+    ]
+  },
+  "certifications": [
+    {
+      "name": "AWS Machine Learning Specialty",
+      "provider": "Amazon Web Services",
+      "year": "2024",
+      "credential": "AWS-MLS-2024"
+    },
+    {
+      "name": "Microsoft Azure AI Fundamentals",
+      "provider": "Microsoft",
+      "year": "2024",
+      "credential": "AZ-900-AI"
+    },
+    {
+      "name": "Google Data Analytics Professional",
+      "provider": "Google",
+      "year": "2023",
+      "credential": "GDA-PRO-2023"
+    },
+    {
+      "name": "Generative AI with Large Language Models",
+      "provider": "DeepLearning.AI",
+      "year": "2024",
+      "credential": "GAILLM-2024"
+    }
+  ],
+  "interests": [
+    {
+      "category": "Photography",
+      "description": "Landscape and street photography with focus on urban architecture and natural lighting"
+    },
+    {
+      "category": "AI Research",
+      "description": "Stay current with latest developments in AI, contribute to open-source projects"
+    },
+    {
+      "category": "Technology",
+      "description": "Building scalable solutions, exploring emerging tech trends, hardware tinkering"
+    }
+  ]
+}

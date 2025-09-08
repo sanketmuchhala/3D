@@ -1,14 +1,222 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Sanket Muchhala - AI/ML Engineer Portfolio. Interactive 3D portfolio showcasing projects, skills, and experience." />
-    <title>Sanket Muchhala - 3D Interactive Portfolio</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sanket Muchhala - 3D Bedroom Portfolio</title>
+    <meta name="description" content="AI/ML Engineer portfolio in an immersive 3D bedroom environment. Navigate through interactive spaces to explore projects, skills, and experience.">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="./assets/favicon.ico" type="image/x-icon">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="./styles.css">
+    
+    <!-- Preload critical resources -->
+    <link rel="modulepreload" href="https://unpkg.com/three@0.167.0/build/three.module.js">
+</head>
+<body>
+    <!-- Skip to content for accessibility -->
+    <a href="#main" class="skip-link">Skip to main content</a>
+    
+    <!-- Navigation -->
+    <nav class="nav" id="nav" role="navigation" aria-label="Main navigation">
+        <div class="nav-content">
+            <div class="nav-brand">
+                <span class="brand-text">Sanket Muchhala</span>
+                <span class="brand-subtitle">AI/ML Engineer</span>
+            </div>
+            <ul class="nav-list" role="menubar">
+                <li role="none">
+                    <button class="nav-link" data-hotspot="about" role="menuitem" aria-label="Navigate to about section">
+                        <span>About</span>
+                    </button>
+                </li>
+                <li role="none">
+                    <button class="nav-link" data-hotspot="projects" role="menuitem" aria-label="Navigate to projects section">
+                        <span>Projects</span>
+                    </button>
+                </li>
+                <li role="none">
+                    <button class="nav-link" data-hotspot="arcade" role="menuitem" aria-label="Navigate to arcade section">
+                        <span>Arcade</span>
+                    </button>
+                </li>
+                <li role="none">
+                    <button class="nav-link" data-hotspot="whiteboard" role="menuitem" aria-label="Navigate to whiteboard section">
+                        <span>Whiteboard</span>
+                    </button>
+                </li>
+                <li role="none">
+                    <button class="nav-link" data-hotspot="contact" role="menuitem" aria-label="Navigate to contact section">
+                        <span>Contact</span>
+                    </button>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    
+    <!-- Main 3D Scene -->
+    <main id="main" class="scene-container" role="main">
+        <canvas id="three-canvas" class="scene-canvas" aria-label="3D bedroom portfolio scene"></canvas>
+        
+        <!-- Loading indicator -->
+        <div id="loading" class="loading-overlay" aria-live="polite">
+            <div class="loading-content">
+                <div class="loading-spinner" aria-hidden="true"></div>
+                <p class="loading-text">Loading bedroom scene...</p>
+            </div>
+        </div>
+        
+        <!-- Instructions -->
+        <div id="instructions" class="instructions" role="complementary">
+            <p>Click on objects to explore • Press 1-5 for quick navigation</p>
+        </div>
+    </main>
+    
+    <!-- Content Overlays -->
+    <div id="overlay-backdrop" class="overlay-backdrop" aria-hidden="true"></div>
+    
+    <!-- About Overlay -->
+    <div id="overlay-about" class="overlay" role="dialog" aria-labelledby="about-title" aria-hidden="true">
+        <div class="overlay-content">
+            <button class="overlay-close" aria-label="Close about section" data-overlay="about">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <header class="overlay-header">
+                <h2 id="about-title">About Me</h2>
+            </header>
+            <div class="overlay-body">
+                <div class="about-content">
+                    <div class="about-summary" id="about-summary">
+                        <!-- Populated by JavaScript -->
+                    </div>
+                    <div class="skills-grid" id="skills-grid">
+                        <!-- Populated by JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Projects Overlay -->
+    <div id="overlay-projects" class="overlay" role="dialog" aria-labelledby="projects-title" aria-hidden="true">
+        <div class="overlay-content">
+            <button class="overlay-close" aria-label="Close projects section" data-overlay="projects">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <header class="overlay-header">
+                <h2 id="projects-title">Featured Projects</h2>
+            </header>
+            <div class="overlay-body">
+                <div class="projects-grid" id="projects-grid">
+                    <!-- Populated by JavaScript -->
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Arcade Overlay -->
+    <div id="overlay-arcade" class="overlay" role="dialog" aria-labelledby="arcade-title" aria-hidden="true">
+        <div class="overlay-content">
+            <button class="overlay-close" aria-label="Close arcade section" data-overlay="arcade">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <header class="overlay-header">
+                <h2 id="arcade-title">Interactive Arcade</h2>
+            </header>
+            <div class="overlay-body">
+                <div class="arcade-content">
+                    <div class="arcade-games">
+                        <div class="arcade-game" data-game="particles">
+                            <canvas class="game-canvas" width="320" height="240"></canvas>
+                            <h3>Particle Physics</h3>
+                            <p>Interactive particle system with mouse attraction</p>
+                        </div>
+                        <div class="arcade-game" data-game="noise">
+                            <canvas class="game-canvas" width="320" height="240"></canvas>
+                            <h3>Plasma Noise</h3>
+                            <p>Real-time procedural noise visualization</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Whiteboard Overlay -->
+    <div id="overlay-whiteboard" class="overlay" role="dialog" aria-labelledby="whiteboard-title" aria-hidden="true">
+        <div class="overlay-content">
+            <button class="overlay-close" aria-label="Close whiteboard section" data-overlay="whiteboard">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <header class="overlay-header">
+                <h2 id="whiteboard-title">Notes & Ideas</h2>
+            </header>
+            <div class="overlay-body">
+                <div class="whiteboard-content">
+                    <div class="note-section">
+                        <h3>Current Research</h3>
+                        <ul>
+                            <li>Agentic AI systems and autonomous reasoning</li>
+                            <li>Document intelligence for enterprise workflows</li>
+                            <li>Efficient deployment of large language models</li>
+                        </ul>
+                    </div>
+                    <div class="note-section">
+                        <h3>Learning Goals</h3>
+                        <ul>
+                            <li>Advanced reinforcement learning techniques</li>
+                            <li>Multimodal AI (vision + language integration)</li>
+                            <li>Edge computing for ML model deployment</li>
+                        </ul>
+                    </div>
+                    <div class="note-section">
+                        <h3>Tech Stack Exploration</h3>
+                        <ul>
+                            <li>JAX for high-performance machine learning</li>
+                            <li>WebAssembly for client-side ML inference</li>
+                            <li>Kubernetes for scalable ML pipelines</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Contact Overlay -->
+    <div id="overlay-contact" class="overlay" role="dialog" aria-labelledby="contact-title" aria-hidden="true">
+        <div class="overlay-content">
+            <button class="overlay-close" aria-label="Close contact section" data-overlay="contact">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            <header class="overlay-header">
+                <h2 id="contact-title">Get In Touch</h2>
+            </header>
+            <div class="overlay-body">
+                <div class="contact-content" id="contact-content">
+                    <!-- Populated by JavaScript -->
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Performance stats (dev only) -->
+    <div id="stats-container" style="position: fixed; top: 10px; left: 10px; z-index: 1000;"></div>
+    
+    <!-- Main Script -->
+    <script type="module" src="./main.js"></script>
+    
+    <!-- Accessibility: Reduced motion detection -->
+    <script>
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            document.documentElement.classList.add('reduced-motion');
+        }
+    </script>
+</body>
 </html>

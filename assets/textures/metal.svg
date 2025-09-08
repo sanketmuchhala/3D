@@ -1,0 +1,44 @@
+<svg width="512" height="512" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="metalBase" cx="30%" cy="30%" r="80%">
+      <stop offset="0%" style="stop-color:#f8f9fa;stop-opacity:1" />
+      <stop offset="20%" style="stop-color:#e9ecef;stop-opacity:1" />
+      <stop offset="60%" style="stop-color:#ced4da;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#adb5bd;stop-opacity:1" />
+    </radialGradient>
+    
+    <!-- Metal brushed texture -->
+    <pattern id="brushedMetal" x="0" y="0" width="4" height="512" patternUnits="userSpaceOnUse">
+      <rect width="4" height="512" fill="url(#metalBase)" />
+      <line x1="1" y1="0" x2="1" y2="512" stroke="#dee2e6" stroke-width="0.5" opacity="0.6"/>
+      <line x1="3" y1="0" x2="3" y2="512" stroke="#6c757d" stroke-width="0.3" opacity="0.4"/>
+    </pattern>
+    
+    <!-- Metal reflection highlights -->
+    <linearGradient id="metalHighlight" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:rgba(255,255,255,0);stop-opacity:0" />
+      <stop offset="30%" style="stop-color:rgba(255,255,255,0.6);stop-opacity:1" />
+      <stop offset="50%" style="stop-color:rgba(255,255,255,0.8);stop-opacity:1" />
+      <stop offset="70%" style="stop-color:rgba(255,255,255,0.4);stop-opacity:1" />
+      <stop offset="100%" style="stop-color:rgba(255,255,255,0);stop-opacity:0" />
+    </linearGradient>
+    
+    <!-- Surface imperfections -->
+    <filter id="metalSurface" x="0%" y="0%" width="100%" height="100%">
+      <feTurbulence baseFrequency="0.1" numOctaves="1" result="surface" seed="7"/>
+      <feColorMatrix in="surface" type="saturate" values="0"/>
+      <feComponentTransfer>
+        <feFuncA type="discrete" tableValues="0.05 0.02 0.01 0.03"/>
+      </feComponentTransfer>
+      <feComposite operator="overlay" in2="SourceGraphic"/>
+    </filter>
+  </defs>
+  
+  <!-- Base metal texture -->
+  <rect width="512" height="512" fill="url(#brushedMetal)" filter="url(#metalSurface)" />
+  
+  <!-- Highlight streaks -->
+  <rect x="0" y="80" width="512" height="60" fill="url(#metalHighlight)" opacity="0.3"/>
+  <rect x="0" y="200" width="512" height="30" fill="url(#metalHighlight)" opacity="0.2"/>
+  <rect x="0" y="350" width="512" height="40" fill="url(#metalHighlight)" opacity="0.25"/>
+</svg>

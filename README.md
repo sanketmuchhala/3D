@@ -1,225 +1,220 @@
-# Sanket Muchhala - 3D Interactive Portfolio
+# 3D Interactive Portfolio - Bedroom Scene
 
-A modern, interactive 3D portfolio website showcasing AI/ML engineering expertise through an immersive web experience. Built with React, Three.js, and inspired by minimal design aesthetics.
+A immersive 3D bedroom portfolio showcasing AI/ML engineering projects, skills, and experience. Built with vanilla Three.js for optimal GitHub Pages compatibility.
 
-![Portfolio Preview](./assets/images/portfolio-preview.jpg)
+## 🌟 Features
 
-## ✨ Features
+- **Immersive 3D Environment**: Cozy bedroom/atelier scene with interactive furniture
+- **Camera Hotspots**: Smooth transitions between 5 different viewpoints
+- **Interactive Objects**: Click on furniture to navigate and explore content
+- **Responsive Design**: Optimized for desktop, tablet, and mobile devices
+- **Accessibility**: Full keyboard navigation, ARIA labels, reduced motion support
+- **Performance**: 60 FPS target with optimized shadows and materials
+- **GitHub Pages Ready**: No build process required, pure ES modules
 
-### 🎨 Design & Aesthetics
-- **Joan Ramos Refusta Inspired**: Minimal chrome, large canvas hero, playful micro-interactions
-- **Original Design Language**: Deep charcoal backgrounds, soft off-white text, cool blue accents
-- **Typography**: Inter Variable for UI, JetBrains Mono Variable for code elements
-- **Responsive**: Fully responsive design that works on desktop, tablet, and mobile
+## 🎮 Navigation
 
-### 🌊 3D Hero Experience  
-- **Kinetic Sculpture**: Original ribbon shards kinetic sculpture that reacts to pointer movement
-- **Smooth Interactions**: Gentle auto-rotation, easing toward cursor, breathing animations
-- **Performance Optimized**: Efficient Three.js rendering with automatic quality adjustment
-- **Accessible**: Respects `prefers-reduced-motion` for accessibility
+### Mouse/Touch Controls
+- **Click** on furniture pieces to navigate to different areas
+- **Click** navigation buttons in the top bar
 
-### 📱 Interactive Sections
-- **About**: Skills showcase with animated badges and professional summary
-- **Projects**: Responsive project cards with hover effects and technology tags
-- **Arcade**: Interactive playground with placeholder sketches and modal system
-- **Whiteboard**: Markdown-rendered notes with sidebar navigation
-- **Contact**: Professional contact methods with availability status
+### Keyboard Shortcuts
+- **1** - About (Overview)
+- **2** - Projects (Desk area)
+- **3** - Arcade (Gaming setup)
+- **4** - Whiteboard (Ideas & research)
+- **5** - Contact (Bedroom area)
+- **ESC** - Close overlays
 
-### ♿ Accessibility First
-- **Keyboard Navigation**: Full keyboard support with visible focus indicators
-- **Screen Reader**: Semantic HTML, ARIA labels, skip-to-content functionality
-- **Motion Preferences**: Respects `prefers-reduced-motion` settings
-- **Color Contrast**: WCAG compliant color schemes
+### Interactive Elements
+- **Desk**: Technical projects and professional work
+- **Bed**: Contact information and personal details
+- **Arcade Cabinet**: Interactive demos and mini-games
+- **Whiteboard**: Research notes and learning goals
+- **Bookshelf**: About section and skills overview
+- **Rubik's Cube**: Easter egg animation (click to spin)
 
-## 🚀 Tech Stack
+## 🏗️ Room Layout
 
-- **Frontend**: React 18 + TypeScript + Vite
-- **3D Graphics**: Three.js + @react-three/fiber + @react-three/drei
-- **Animations**: Framer Motion for smooth UI animations  
-- **Styling**: CSS Variables + Modern CSS features
-- **Fonts**: Inter Variable, JetBrains Mono Variable
-- **Build**: Vite with hot module replacement
-- **Deployment**: Replit-ready configuration
-
-## 🏃‍♂️ Quick Start
-
-### Prerequisites
-- Node.js 18+ 
-- npm or yarn
-
-### Local Development
-```bash
-# Clone the repository
-git clone <your-repo-url>
-cd 3d-portfolio
-
-# Install dependencies
-npm install
-
-# Start development server
-npm run dev
-
-# Build for production
-npm run build
-
-# Preview production build
-npm run preview
+```
+    Arcade    Whiteboard
+       |          |
+   ----+----------+----
+   |                  |  
+   |    📺      📋    |  Back Wall
+   |                  |
+   |  📚    🎲   💻  |  
+   |               🖱️ |  
+   |      🛏️         |  
+   |                  |
+   +------------------+
+        Front Opening
 ```
 
-### Replit Deployment
-This project is configured to run on Replit out of the box:
+### Hotspot Areas
+1. **About** (2, 1.6, 2) → Room overview and personal introduction
+2. **Projects** (-2.5, 1.4, 0) → Desk with monitor showing technical work
+3. **Arcade** (0, 1.2, -1.8) → Gaming cabinet with interactive demos  
+4. **Whiteboard** (2.5, 1.5, -1) → Ideas board with research notes
+5. **Contact** (0, 1.6, 1.8) → Bedroom area with contact information
 
-1. Import this repository to Replit
-2. The project will automatically install dependencies
-3. Click "Run" to start the development server
-4. Access your portfolio at the provided URL
+## 🛠️ Technical Stack
+
+- **Three.js r167**: 3D rendering engine (ES modules from CDN)
+- **Vanilla JavaScript**: No framework dependencies
+- **SVG Textures**: Procedural materials for optimal file size
+- **HTML Overlays**: Content display system with glassmorphism design
+- **CSS3**: Modern styling with custom properties and accessibility
+
+## 🚀 Deployment
+
+### GitHub Pages Deployment
+
+1. **Enable GitHub Pages**:
+   - Go to repository Settings → Pages
+   - Source: Deploy from a branch
+   - Branch: `main` (or your preferred branch)
+   - Folder: `/ (root)`
+
+2. **Access your site**:
+   ```
+   https://yourusername.github.io/your-repository-name/
+   ```
+
+### Local Development
+
+```bash
+# Clone the repository
+git clone https://github.com/yourusername/your-repo.git
+cd your-repo
+
+# Serve locally (any HTTP server works)
+python -m http.server 8000
+# OR
+npx serve .
+# OR
+php -S localhost:8000
+
+# Open in browser
+open http://localhost:8000
+```
 
 ## 📁 Project Structure
 
 ```
-src/
-├── components/          # Reusable UI components
-│   ├── Nav.tsx         # Navigation with scroll spy
-│   ├── Footer.tsx      # Footer with social links
-│   ├── Section.tsx     # Section wrapper component
-│   └── SkipToContent.tsx # Accessibility skip link
-├── sections/           # Page sections
-│   ├── Hero.tsx        # Hero section with 3D stage
-│   ├── About.tsx       # About section with skills
-│   ├── Projects.tsx    # Projects showcase
-│   ├── Arcade.tsx      # Interactive playground
-│   ├── Whiteboard.tsx  # Notes and thoughts
-│   └── Contact.tsx     # Contact information
-├── 3d/                 # Three.js components
-│   ├── HeroStage.tsx   # Main 3D canvas setup
-│   └── RibbonShards.tsx # Kinetic sculpture component
-├── styles/             # CSS styles
-│   ├── tokens.css      # Design system variables
-│   ├── global.css      # Global styles and reset
-│   ├── components.css  # Component-specific styles
-│   └── sections.css    # Section-specific styles
-├── data/               # Content data
-│   └── projects.json   # Portfolio projects and info
-├── App.tsx             # Main application component
-└── main.tsx           # Application entry point
-
-content/notes/          # Markdown notes for whiteboard
-public/                 # Static assets
+├── index.html          # Main HTML structure
+├── styles.css          # Comprehensive styling
+├── main.js             # Three.js application
+├── data.json           # Portfolio content data
+├── assets/
+│   └── textures/       # SVG procedural textures
+│       ├── wood-grain.svg
+│       ├── wall-paint.svg
+│       ├── carpet.svg
+│       ├── fabric.svg
+│       └── metal.svg
+└── README.md           # This file
 ```
 
-## 🎯 Performance & Optimization
+## ⚡ Performance Optimizations
 
-### Bundle Analysis
-- **Main bundle**: ~314KB gzipped (1.1MB uncompressed)
-- **Dynamic imports**: Ready for code-splitting implementation
-- **Font optimization**: Variable fonts with subset loading
-- **Image optimization**: WebP with fallbacks
+### Rendering
+- **Shadow Optimization**: Limited shadow casters for performance
+- **Texture Management**: SVG textures for scalable, lightweight materials
+- **Geometry Reuse**: Efficient mesh creation and material sharing
+- **Level of Detail**: Simplified models for distant objects
 
-### 3D Performance
-- **Adaptive quality**: Automatic quality reduction on lower-end devices
-- **Memory management**: Proper geometry and material disposal
-- **Frame rate targeting**: Optimized for 60fps on desktop, 30fps on mobile
-- **Stats monitoring**: Development performance monitoring
+### Memory Management
+- **Texture Compression**: Optimized SVG patterns
+- **Geometry Disposal**: Proper cleanup of Three.js resources
+- **Minimal Dependencies**: Pure ES modules, no build process
+
+### Target Performance
+- **Desktop**: 60 FPS on laptop integrated GPUs
+- **Mobile**: 30 FPS on mid-range devices
+- **Memory**: <50MB total memory usage
 
 ## ♿ Accessibility Features
 
 ### Keyboard Navigation
-- Tab navigation through all interactive elements
-- Enter/Space activation for buttons
-- Focus indicators for all focusable elements
-- Skip-to-content link for screen readers
+- Full keyboard control for all interactions
+- Tab navigation through interactive elements
+- Arrow key support for hotspot navigation
 
-### Screen Reader Support
-- Semantic HTML structure with proper headings
-- ARIA labels for interactive elements
-- Alt text for images and icons
-- Proper landmark regions
+### Screen Readers
+- Semantic HTML structure with proper ARIA labels
+- Alternative text for all visual elements
+- Live regions for dynamic content updates
 
-### Motion Accessibility
-- Respects `prefers-reduced-motion` media query
-- Reduced or disabled animations based on user preference
-- Fallback static content for motion-sensitive users
+### Visual Accessibility
+- High contrast mode support
+- Reduced motion preference detection
+- Scalable text and UI elements
+- Focus indicators for all interactive elements
 
-## 🎨 Design Decisions
-
-### Color Palette
-- **Background**: Deep charcoal (#1a1a1a) for focus and elegance
-- **Text**: Soft off-white (#f8f8f8) for readability
-- **Accent**: Cool blue (#00d4ff) used sparingly for emphasis
-- **Secondary**: Warm accents for visual variety
-
-### Typography Scale
-- **Headlines**: Large scale with tight line-height for impact
-- **Body**: Generous line-height (1.75) for readability
-- **Code**: Monospace font for technical elements
-- **Hierarchy**: Clear visual hierarchy with consistent spacing
-
-### Motion Language
-- **Subtle**: Gentle micro-interactions that enhance UX
-- **Purposeful**: Animation serves functional purposes
-- **Accessible**: Respects user motion preferences
-- **Performant**: GPU-accelerated transforms
-
-## 📊 Lighthouse Scores
-
-Target scores for production build:
-- **Performance**: ≥85
-- **Accessibility**: ≥95  
-- **Best Practices**: ≥95
-- **SEO**: ≥90
-
-## 🔧 Customization
+## 🎨 Customization
 
 ### Content Updates
-Edit `src/data/projects.json` to update:
+Edit `data.json` to update:
 - Personal information
 - Project details
-- Skills and certifications
+- Skills and technologies
 - Contact information
+- Certifications
 
-### Styling Changes
-Modify design tokens in `src/styles/tokens.css`:
-- Color palette
-- Typography scale
-- Spacing system
-- Animation timings
-
-### 3D Scene Modifications
-Customize the hero stage in `src/3d/`:
-- Adjust kinetic sculpture parameters
-- Modify lighting setup
-- Change camera settings
-- Add new 3D elements
-
-## 🚀 Deployment Options
-
-### Replit (Recommended)
-- Zero configuration deployment
-- Automatic HTTPS
-- Custom domain support
-- Built-in collaboration features
-
-### Vercel
-```bash
-npm install -g vercel
-vercel --prod
+### Visual Styling
+Modify CSS custom properties in `styles.css`:
+```css
+:root {
+  --accent-primary: #4a9eff;      /* Primary accent color */
+  --accent-secondary: #00d4ff;    /* Secondary accent */
+  --bg-primary: #0a0a0f;          /* Background color */
+  /* ... other variables */
+}
 ```
 
-### Netlify
-```bash
-npm run build
-# Upload dist/ folder to Netlify
+### Room Layout
+Adjust furniture positions and hotspots in `main.js`:
+```javascript
+const hotspots = {
+  about: { 
+    position: new THREE.Vector3(x, y, z), 
+    target: new THREE.Vector3(x, y, z) 
+  },
+  // ... other hotspots
+};
 ```
 
-### GitHub Pages
-```bash
-npm run build
-# Deploy dist/ folder to gh-pages branch
-```
+## 🐛 Browser Compatibility
+
+### Supported Browsers
+- **Chrome**: 90+
+- **Firefox**: 88+
+- **Safari**: 14+
+- **Edge**: 90+
+
+### Required Features
+- ES6 Modules
+- WebGL 2.0
+- CSS Grid
+- CSS Custom Properties
+
+## 📊 Analytics & Monitoring
+
+### Performance Monitoring
+Development mode includes:
+- FPS counter (stats.js)
+- Memory usage tracking
+- Render time analysis
+
+### Production Monitoring
+Consider adding:
+- Google Analytics
+- Error tracking (Sentry)
+- Performance monitoring (Web Vitals)
+
 
 ## 🤝 Contributing
-
-This is a personal portfolio project, but suggestions and improvements are welcome:
 
 1. Fork the repository
 2. Create a feature branch (`git checkout -b feature/amazing-feature`)
@@ -229,18 +224,17 @@ This is a personal portfolio project, but suggestions and improvements are welco
 
 ## 📄 License
 
-This project is open source and available under the [MIT License](LICENSE).
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
-## 📞 Contact
+## 🙏 Acknowledgments
 
-**Sanket Muchhala**
-- Portfolio: [Live Demo](your-deployed-url)
-- LinkedIn: [linkedin.com/in/sanketmuchhala](https://linkedin.com/in/sanketmuchhala)
-- GitHub: [github.com/sanketmuchhala](https://github.com/sanketmuchhala)
-- Email: sanket.muchhala@example.com
+- **Three.js**: Powerful 3D library
+- **GitHub Pages**: Free static hosting
+- **SVG**: Scalable vector graphics for textures
+- **Modern Web Standards**: ES6 modules, CSS Grid, WebGL
 
 ---
 
-**Built with ❤️ and Three.js by Sanket Muchhala**
+**Live Demo**: [View Portfolio](https://yourusername.github.io/your-repository-name/)
 
-*This portfolio represents the intersection of creativity and technology, demonstrating both technical expertise and innovative thinking in modern web development and AI/ML engineering.*
+**Contact**: [your.email@example.com](mailto:your.email@example.com)
