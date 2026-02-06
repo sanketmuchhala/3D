@@ -1,11 +1,13 @@
 import { useRef } from 'react'
 import { useFrame } from '@react-three/fiber'
+import { Html } from '@react-three/drei'
 import * as THREE from 'three'
 
-function Monitor({ position, rotation = [0, 0, 0] as [number, number, number], scale = 1 }: {
+function Monitor({ position, rotation = [0, 0, 0] as [number, number, number], scale = 1, liveUrl }: {
   position: [number, number, number]
   rotation?: [number, number, number]
   scale?: number
+  liveUrl?: string
 }) {
   const screenRef = useRef<THREE.Mesh>(null)
 
@@ -27,12 +29,35 @@ function Monitor({ position, rotation = [0, 0, 0] as [number, number, number], s
         <planeGeometry args={[0.54, 0.3]} />
         <meshStandardMaterial color="#0c1220" roughness={0.15} emissive="#0a1628" emissiveIntensity={0.5} />
       </mesh>
-      {Array.from({ length: 7 }).map((_, i) => (
-        <mesh key={i} position={[-0.16 + (i % 3) * 0.015, 0.1 - i * 0.03, 0.013]}>
-          <planeGeometry args={[0.1 + ((i * 7 + 3) % 5) * 0.03, 0.006]} />
-          <meshBasicMaterial color={['#64b5f6', '#81c784', '#ce93d8', '#ffb74d'][i % 4]} transparent opacity={0.45} />
-        </mesh>
-      ))}
+      {liveUrl ? (
+        <Html
+          transform
+          occlude
+          position={[0, 0, 0.014]}
+          scale={0.062}
+          style={{ pointerEvents: 'none' }}
+        >
+          <iframe
+            src={liveUrl}
+            title="Live Preview"
+            style={{
+              width: '540px',
+              height: '300px',
+              border: 'none',
+              borderRadius: '2px',
+              overflow: 'hidden',
+              pointerEvents: 'none',
+            }}
+          />
+        </Html>
+      ) : (
+        Array.from({ length: 7 }).map((_, i) => (
+          <mesh key={i} position={[-0.16 + (i % 3) * 0.015, 0.1 - i * 0.03, 0.013]}>
+            <planeGeometry args={[0.1 + ((i * 7 + 3) % 5) * 0.03, 0.006]} />
+            <meshBasicMaterial color={['#64b5f6', '#81c784', '#ce93d8', '#ffb74d'][i % 4]} transparent opacity={0.45} />
+          </mesh>
+        ))
+      )}
       <mesh position={[0, -0.22, -0.03]} castShadow>
         <boxGeometry args={[0.035, 0.07, 0.035]} />
         <meshStandardMaterial color="#2a2a2a" roughness={0.2} metalness={0.8} />
@@ -67,7 +92,7 @@ export default function Desk() {
       </mesh>
 
       {/* Triple monitors */}
-      <Monitor position={[0, 1.0, -0.18]} scale={1.05} />
+      <Monitor position={[0, 1.0, -0.18]} scale={1.05} liveUrl="https://sanketmuchhala.github.io/claudos/" />
       <Monitor position={[-0.65, 0.98, -0.14]} rotation={[0, 0.22, 0]} scale={0.9} />
       <Monitor position={[0.65, 0.98, -0.14]} rotation={[0, -0.22, 0]} scale={0.9} />
 
