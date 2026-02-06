@@ -315,6 +315,27 @@ a { color: inherit; text-decoration: none; }
   border-radius: 10px;
 }
 
+/* ── Experience ──────────────────────────────────── */
+.experience-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.experience-item {
+  padding: 16px;
+  background: rgba(245,240,235,0.02);
+  border-left: 2px solid rgba(245,240,235,0.1);
+  border-radius: 0 10px 10px 0;
+}
+
+.exp-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 4px;
+}
+
 /* ── Contact ─────────────────────────────────────── */
 .contact-panel .panel-summary {
   margin-bottom: 20px;

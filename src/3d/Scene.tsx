@@ -1,5 +1,5 @@
 import { Suspense } from 'react'
-import { OrbitControls, Environment } from '@react-three/drei'
+import { OrbitControls } from '@react-three/drei'
 import Room from './Room'
 import Bed from './Bed'
 import Desk from './Desk'
@@ -21,22 +21,20 @@ export default function Scene({ onHotspotClick }: { onHotspotClick: (id: string)
         <Plants />
         <WallDecor />
         <Hotspots onClick={onHotspotClick} />
-        <Environment preset="apartment" environmentIntensity={0.15} />
       </Suspense>
-
       <OrbitControls
         makeDefault
-        target={[0, 1.2, 0]}
+        target={[0, 1.1, 0]}
         minDistance={2.5}
-        maxDistance={7}
+        maxDistance={6.5}
         minPolarAngle={Math.PI * 0.15}
-        maxPolarAngle={Math.PI * 0.55}
-        minAzimuthAngle={-Math.PI * 0.6}
-        maxAzimuthAngle={Math.PI * 0.6}
+        maxPolarAngle={Math.PI * 0.52}
+        minAzimuthAngle={-Math.PI * 0.55}
+        maxAzimuthAngle={Math.PI * 0.55}
         enablePan={false}
         enableDamping
-        dampingFactor={0.05}
-        rotateSpeed={0.5}
+        dampingFactor={0.06}
+        rotateSpeed={0.45}
       />
     </>
   )
