@@ -1,62 +1,100 @@
 import { useEffect, useRef } from 'react'
 import type { OverlayId } from '../App'
 
-/* ── Portfolio Data ───────────────────────────────── */
-
 const aboutData = {
-  summary: "AI/ML Engineer with 3+ years of experience specializing in generative AI, LLMs, and NLP. I build agentic systems, document intelligence workflows, and ML pipelines — with a focus on automation and data-backed insights across insurance, esports, and enterprise analytics.",
-  highlights: [
-    "Generative AI & LLM specialist",
-    "Cloud architecture (AWS / Azure)",
-    "Full-stack ML pipeline development",
-    "Automation-first engineering mindset",
+  summary: "AI/ML specialist with 3+ years developing scalable solutions in generative AI, LLMs, NLP, agentic systems, and document intelligence. Deployed production systems across insurance, esports, and enterprise analytics.",
+  education: [
+    { degree: "M.S. Data Science", school: "Indiana University Bloomington", years: "2022–2024" },
+    { degree: "B.Tech Information Technology", school: "Thakur College of Engineering, India", years: "2018–2022" },
   ],
   certs: [
-    "AWS Machine Learning Specialty",
-    "Microsoft Azure AI Fundamentals",
+    "AWS Machine Learning Engineer Associate",
+    "Azure AI Fundamentals (AI-900)",
+    "Databricks Generative AI Foundations",
     "Google Data Analytics Professional",
-    "Generative AI with LLMs (DeepLearning.AI)",
-  ]
+  ],
 }
+
+const experienceData = [
+  {
+    role: "AI Engineer",
+    company: "Progressive Insurance",
+    period: "May 2024 – Present",
+    highlights: [
+      "Built custom NLP/CV models with TensorFlow & PyTorch for claims processing",
+      "BERT-based NER and sentiment analysis via Hugging Face Transformers",
+      "ML pipelines with Apache Airflow & Azure Data Factory",
+      "35% reduction in manual processing, 25% fraud detection improvement",
+    ],
+  },
+  {
+    role: "Research Assistant (Generative AI)",
+    company: "Indiana University",
+    period: "Dec 2023 – May 2024",
+    highlights: [
+      "GPT-4 RAG pipeline for esports video transcription (200+ hrs)",
+      "18pp accuracy improvement, 40% chat latency reduction",
+    ],
+  },
+  {
+    role: "Data Analyst",
+    company: "IBM",
+    period: "Sep 2020 – Jun 2022",
+    highlights: [
+      "Churn prediction model: 20% customer attrition reduction",
+      "Azure Data Lake ETL optimization, 15% processing speedup",
+    ],
+  },
+]
 
 const projectsData = [
   {
-    name: "AI Learning Assistant",
-    desc: "Intelligent study scheduler with adaptive learning and interview prep capabilities. Improved study efficiency by 40% for beta users.",
-    tech: ["Python", "NLP", "TensorFlow", "FastAPI"],
+    name: "Project Green Lantern",
+    desc: "Minimalist chat UI for cloud & local LLMs with built-in Prompt Analytics dashboard.",
+    tech: ["TypeScript", "React", "Node.js", "Ollama", "IndexedDB"],
   },
   {
-    name: "Job Application Automation",
-    desc: "DeepSeek AI-powered semantic matching system. Reduced application time by 80% at $0.14/1M tokens.",
-    tech: ["DeepSeek API", "Python", "NLP", "Automation"],
+    name: "AI Study Buddy",
+    desc: "Intelligent learning assistant with spaced repetition, adaptive recommendations, and interview coaching.",
+    tech: ["React", "TypeScript", "Vite", "TailwindCSS", "AI/ML"],
   },
   {
-    name: "AWS Serverless Geospatial",
-    desc: "Scalable geospatial pipeline with S3/Lambda and OpenStreetMap integration. 99% uptime, 10M+ queries/month.",
-    tech: ["AWS Lambda", "S3", "OpenStreetMap", "API Gateway"],
+    name: "AI Job Application Agent",
+    desc: "DeepSeek AI semantic matching for automated job applications. ~$0.01-0.03 per application.",
+    tech: ["Python", "DeepSeek AI", "MCP Protocol", "Claude Desktop"],
   },
   {
-    name: "AI vs Human Brain Analysis",
-    desc: "Deep-dive research into AI cognition differences. 10K+ readers, featured in AI research communities.",
-    tech: ["Research", "Technical Writing", "Data Viz"],
+    name: "AI System Design Generator",
+    desc: "AI-powered architecture diagrams and technical docs. 90% reduction in manual diagram creation.",
+    tech: ["Python", "AI/ML", "Diagram Generation"],
+  },
+  {
+    name: "Location-Based File Sharing",
+    desc: "Serverless AWS geospatial file sharing with proximity-based access control. 99.5% accuracy.",
+    tech: ["AWS Lambda", "S3", "PostGIS", "Leaflet.js"],
+  },
+  {
+    name: "RAG Chatbot",
+    desc: "Retrieval-Augmented Generation chatbot using Deepseek for intelligent document Q&A.",
+    tech: ["Python", "DeepSeek", "RAG", "Vector DB"],
   },
 ]
 
 const skillsData: Record<string, string[]> = {
-  "AI / ML": ["Generative AI", "LLMs", "NLP", "Document Intelligence", "Agentic Systems", "Deep Learning", "Computer Vision"],
-  "Cloud": ["AWS", "Azure", "Serverless", "Lambda", "API Gateway", "S3", "CloudFormation"],
-  "Languages & Frameworks": ["Python", "JavaScript", "TensorFlow", "PyTorch", "FastAPI", "React", "Node.js", "SQL"],
-  "Specialties": ["Automation", "Data Analytics", "ML Deployment", "ETL Pipelines", "API Development", "System Architecture"],
+  "AI / ML": ["Generative AI", "LLMs", "NLP", "RAG Systems", "Agentic AI", "Deep Learning", "Computer Vision", "BERT", "GPT-4"],
+  "Frameworks": ["TensorFlow", "PyTorch", "LangChain", "Hugging Face", "FastAPI", "Scikit-learn", "SpaCy", "MLflow"],
+  "Cloud & Data": ["AWS", "Azure", "PySpark", "Apache Airflow", "Docker", "Kubernetes", "FAISS"],
+  "Languages": ["Python", "SQL", "R", "JavaScript", "TypeScript"],
+  "Visualization": ["Tableau", "Power BI", "R Shiny"],
 }
 
 const contactData = {
-  email: "sanket.muchhala@example.com",
+  email: "sanketmuchhala1@gmail.com",
   github: "https://github.com/sanketmuchhala",
   linkedin: "https://linkedin.com/in/sanketmuchhala",
   website: "https://sanketmuchhala.github.io",
+  leetcode: "https://leetcode.com/sanketmuchhala",
 }
-
-/* ── Panel Components ───────────────────────────────── */
 
 function AboutPanel() {
   return (
@@ -64,9 +102,11 @@ function AboutPanel() {
       <p className="panel-summary">{aboutData.summary}</p>
       <div className="panel-grid two-col">
         <div>
-          <h3>Highlights</h3>
+          <h3>Education</h3>
           <ul className="tag-list">
-            {aboutData.highlights.map((h, i) => <li key={i}>{h}</li>)}
+            {aboutData.education.map((e, i) => (
+              <li key={i}><strong>{e.degree}</strong><br/><span style={{opacity:0.6,fontSize:'12px'}}>{e.school} ({e.years})</span></li>
+            ))}
           </ul>
         </div>
         <div>
@@ -75,6 +115,31 @@ function AboutPanel() {
             {aboutData.certs.map((c, i) => <li key={i}>{c}</li>)}
           </ul>
         </div>
+      </div>
+    </div>
+  )
+}
+
+function ExperiencePanel() {
+  return (
+    <div className="panel-content">
+      <div className="experience-list">
+        {experienceData.map((exp, i) => (
+          <div key={i} className="experience-item">
+            <div className="exp-header">
+              <h3 style={{fontSize:'14px',fontWeight:600,color:'#f0ebe3',textTransform:'none',letterSpacing:'-0.01em'}}>{exp.role}</h3>
+              <span style={{fontSize:'12px',opacity:0.5}}>{exp.period}</span>
+            </div>
+            <p style={{fontSize:'13px',opacity:0.6,marginBottom:'8px'}}>{exp.company}</p>
+            <ul style={{listStyle:'none',display:'flex',flexDirection:'column',gap:'4px'}}>
+              {exp.highlights.map((h, j) => (
+                <li key={j} style={{fontSize:'12px',color:'rgba(245,240,235,0.65)',paddingLeft:'12px',position:'relative'}}>
+                  <span style={{position:'absolute',left:0,opacity:0.3}}>-</span>{h}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
       </div>
     </div>
   )
@@ -118,7 +183,7 @@ function SkillsPanel() {
 function ContactPanel() {
   return (
     <div className="panel-content contact-panel">
-      <p className="panel-summary">Let's build something together. Reach out through any of the channels below.</p>
+      <p className="panel-summary">Let's build something together. Reach out through any channel below.</p>
       <div className="contact-links">
         <a href={`mailto:${contactData.email}`} className="contact-link">
           <span className="contact-icon">@</span>
@@ -134,17 +199,20 @@ function ContactPanel() {
         </a>
         <a href={contactData.website} target="_blank" rel="noopener noreferrer" className="contact-link">
           <span className="contact-icon">W</span>
-          <span>Website</span>
+          <span>Portfolio</span>
+        </a>
+        <a href={contactData.leetcode} target="_blank" rel="noopener noreferrer" className="contact-link">
+          <span className="contact-icon">LC</span>
+          <span>LeetCode</span>
         </a>
       </div>
     </div>
   )
 }
 
-/* ── Overlay Container ───────────────────────────── */
-
 const panels: Record<string, { title: string; Component: () => JSX.Element }> = {
   about: { title: 'About Me', Component: AboutPanel },
+  experience: { title: 'Experience', Component: ExperiencePanel },
   projects: { title: 'Projects', Component: ProjectsPanel },
   skills: { title: 'Skills & Tech', Component: SkillsPanel },
   contact: { title: 'Get In Touch', Component: ContactPanel },
@@ -164,7 +232,9 @@ export default function Overlay({ activeId, onClose }: { activeId: OverlayId; on
   }, [activeId, onClose])
 
   if (!activeId) return null
-  const { title, Component } = panels[activeId]
+  const panel = panels[activeId]
+  if (!panel) return null
+  const { title, Component } = panel
 
   return (
     <>

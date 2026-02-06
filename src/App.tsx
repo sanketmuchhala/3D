@@ -4,7 +4,7 @@ import Scene from './3d/Scene'
 import Overlay from './components/Overlay'
 import './styles/global.css'
 
-export type OverlayId = 'about' | 'projects' | 'skills' | 'contact' | null
+export type OverlayId = 'about' | 'experience' | 'projects' | 'skills' | 'contact' | null
 
 export default function App() {
   const [activeOverlay, setActiveOverlay] = useState<OverlayId>(null)
@@ -37,10 +37,10 @@ export default function App() {
       <nav className="nav-bar">
         <div className="nav-brand">
           <span className="brand-name">Sanket Muchhala</span>
-          <span className="brand-title">AI/ML Engineer</span>
+          <span className="brand-title">AI Engineer & Data Scientist</span>
         </div>
         <div className="nav-links">
-          {(['about', 'projects', 'skills', 'contact'] as const).map((id) => (
+          {(['about', 'experience', 'projects', 'skills', 'contact'] as const).map((id) => (
             <button
               key={id}
               className={`nav-link ${activeOverlay === id ? 'active' : ''}`}

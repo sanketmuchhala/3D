@@ -3,79 +3,58 @@ import { useFrame } from '@react-three/fiber'
 import { Html } from '@react-three/drei'
 import * as THREE from 'three'
 
-interface HotspotDef {
-  id: string
-  label: string
-  position: [number, number, number]
-  color: string
-}
+interface Spot { id: string; label: string; position: [number, number, number]; color: string }
 
-const hotspots: HotspotDef[] = [
-  { id: 'about', label: 'About Me', position: [2.5, 1.5, 2.0], color: '#7ab0d4' },
-  { id: 'projects', label: 'Projects', position: [-2.0, 1.4, -2.0], color: '#d4a07a' },
-  { id: 'skills', label: 'Skills', position: [3.8, 1.2, -2.5], color: '#7ad49a' },
-  { id: 'contact', label: 'Contact', position: [0, 1.6, 3.3], color: '#d47a9a' },
+const spots: Spot[] = [
+  { id: 'about', label: 'About Me', position: [2.2, 1.3, 1.5], color: '#7ab0d4' },
+  { id: 'projects', label: 'Projects', position: [-1.5, 1.3, -2.2], color: '#d4a07a' },
+  { id: 'skills', label: 'Skills', position: [3.05, 1.1, -2.0], color: '#7ad49a' },
+  { id: 'experience', label: 'Experience', position: [-1.5, 2.1, -2.8], color: '#d4c87a' },
+  { id: 'contact', label: 'Contact', position: [0, 1.4, 2.8], color: '#d47a9a' },
 ]
 
-function Hotspot({ def, onClick }: { def: HotspotDef; onClick: (id: string) => void }) {
-  const meshRef = useRef<THREE.Mesh>(null)
+function Orb({ spot, onClick }: { spot: Spot; onClick: (id: string) => void }) {
+  const ref = useRef<THREE.Mesh>(null)
   const [hovered, setHovered] = useState(false)
 
   useFrame(({ clock }) => {
-    if (meshRef.current) {
+    if (ref.current) {
       const t = clock.getElapsedTime()
-      meshRef.current.position.y = def.position[1] + Math.sin(t * 1.5 + def.position[0]) * 0.06
-      const s = hovered ? 1.3 : 1.0
-      meshRef.current.scale.setScalar(s + Math.sin(t * 2) * 0.05)
+      ref.current.position.y = spot.position[1] + Math.sin(t * 1.5 + spot.position[0]) * 0.05
+      ref.current.scale.setScalar((hovered ? 1.25 : 1) + Math.sin(t * 2) * 0.04)
     }
   })
 
   return (
     <group>
       <mesh
-        ref={meshRef}
-        position={def.position}
-        onClick={(e) => { e.stopPropagation(); onClick(def.id) }}
+        ref={ref}
+        position={spot.position}
+        onClick={(e) => { e.stopPropagation(); onClick(spot.id) }}
         onPointerEnter={() => { setHovered(true); document.body.style.cursor = 'pointer' }}
         onPointerLeave={() => { setHovered(false); document.body.style.cursor = 'default' }}
       >
-        <sphereGeometry args={[0.08, 16, 16]} />
+        <sphereGeometry args={[0.07, 14, 14]} />
         <meshStandardMaterial
-          color={def.color}
-          emissive={def.color}
-          emissiveIntensity={hovered ? 0.8 : 0.4}
-          transparent
-          opacity={hovered ? 0.95 : 0.7}
-          roughness={0.2}
+          color={spot.color} emissive={spot.color}
+          emissiveIntensity={hovered ? 0.8 : 0.35}
+          transparent opacity={hovered ? 0.9 : 0.65} roughness={0.2}
         />
       </mesh>
-      {/* Ring around hotspot */}
-      <mesh position={def.position} rotation={[Math.PI / 2, 0, 0]}>
-        <torusGeometry args={[0.12, 0.008, 8, 32]} />
-        <meshStandardMaterial
-          color={def.color}
-          emissive={def.color}
-          emissiveIntensity={0.3}
-          transparent
-          opacity={0.5}
-        />
+      <mesh position={spot.position} rotation={[Math.PI / 2, 0, 0]}>
+        <torusGeometry args={[0.1, 0.006, 6, 28]} />
+        <meshStandardMaterial color={spot.color} emissive={spot.color} emissiveIntensity={0.25} transparent opacity={0.4} />
       </mesh>
       {hovered && (
-        <Html position={[def.position[0], def.position[1] + 0.25, def.position[2]]} center>
+        <Html position={[spot.position[0], spot.position[1] + 0.2, spot.position[2]]} center>
           <div style={{
-            background: 'rgba(26, 26, 46, 0.9)',
-            color: '#f5f0eb',
-            padding: '6px 14px',
-            borderRadius: '8px',
-            fontSize: '13px',
-            fontFamily: 'Inter, sans-serif',
-            fontWeight: 500,
-            whiteSpace: 'nowrap',
-            backdropFilter: 'blur(8px)',
-            border: `1px solid ${def.color}40`,
-            pointerEvents: 'none',
+            background: 'rgba(20,20,38,0.88)', color: '#f0ebe3',
+            padding: '5px 12px', borderRadius: '7px', fontSize: '12px',
+            fontFamily: 'Inter,system-ui,sans-serif', fontWeight: 500,
+            whiteSpace: 'nowrap', backdropFilter: 'blur(8px)',
+            border: `1px solid ${spot.color}30`, pointerEvents: 'none',
           }}>
-            {def.label}
+            {spot.label}
           </div>
         </Html>
       )}
@@ -86,9 +65,7 @@ function Hotspot({ def, onClick }: { def: HotspotDef; onClick: (id: string) => v
 export default function Hotspots({ onClick }: { onClick: (id: string) => void }) {
   return (
     <group>
-      {hotspots.map((def) => (
-        <Hotspot key={def.id} def={def} onClick={onClick} />
-      ))}
+      {spots.map((s) => <Orb key={s.id} spot={s} onClick={onClick} />)}
     </group>
   )
 }
