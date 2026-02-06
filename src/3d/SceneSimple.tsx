@@ -8,9 +8,8 @@ import Plants from './Plants'
 import Lighting from './Lighting'
 import WallDecor from './WallDecor'
 
-// Temporarily using original scene structure
-// The new interaction system is ready but needs debugging
-export default function Scene() {
+// Minimal scene to test if rendering works
+export default function SceneSimple() {
   return (
     <>
       <Lighting />

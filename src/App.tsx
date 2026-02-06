@@ -1,22 +1,26 @@
-import { useState, useCallback } from 'react'
+import { useState, useEffect } from 'react'
 import { Canvas } from '@react-three/fiber'
 import Scene from './3d/Scene'
-import Overlay from './components/Overlay'
 import './styles/global.css'
 
-export type OverlayId = 'about' | 'experience' | 'projects' | 'skills' | 'contact' | null
-
 export default function App() {
-  const [activeOverlay, setActiveOverlay] = useState<OverlayId>(null)
   const [showHint, setShowHint] = useState(true)
 
-  const handleHotspotClick = useCallback((id: string) => {
-    setActiveOverlay(id as OverlayId)
-    setShowHint(false)
+  useEffect(() => {
+    // Hide hint after 5 seconds
+    const timer = setTimeout(() => setShowHint(false), 5000)
+    return () => clearTimeout(timer)
   }, [])
 
-  const handleClose = useCallback(() => {
-    setActiveOverlay(null)
+  useEffect(() => {
+    // Listen for H key to toggle hint
+    const handleKey = (e: KeyboardEvent) => {
+      if (e.key === 'h' || e.key === 'H') {
+        setShowHint((prev) => !prev)
+      }
+    }
+    window.addEventListener('keydown', handleKey)
+    return () => window.removeEventListener('keydown', handleKey)
   }, [])
 
   return (
@@ -30,43 +34,40 @@ export default function App() {
       >
         <color attach="background" args={['#1a1a2e']} />
         <fog attach="fog" args={['#1a1a2e', 8, 18]} />
-        <Scene onHotspotClick={handleHotspotClick} />
+        <Scene />
       </Canvas>
 
-      {/* Navigation bar */}
-      <nav className="nav-bar">
-        <div className="nav-brand">
-          <span className="brand-name">Sanket Muchhala</span>
-          <span className="brand-title">AI Engineer & Data Scientist</span>
-        </div>
-        <div className="nav-links">
-          {(['about', 'experience', 'projects', 'skills', 'contact'] as const).map((id) => (
-            <button
-              key={id}
-              className={`nav-link ${activeOverlay === id ? 'active' : ''}`}
-              onClick={() => { setActiveOverlay(id); setShowHint(false) }}
-            >
-              {id.charAt(0).toUpperCase() + id.slice(1)}
-            </button>
-          ))}
-        </div>
-      </nav>
-
-      {/* Interaction hint */}
+      {/* Interaction hints */}
       {showHint && (
-        <div className="hint" onClick={() => setShowHint(false)}>
-          <div className="hint-icon">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-              <path d="M15 15l-2 5L9 9l11 4-5 2z" />
-              <path d="M15 15l4 4" />
-            </svg>
+        <div
+          className="hint"
+          style={{
+            position: 'fixed',
+            bottom: '40px',
+            left: '50%',
+            transform: 'translateX(-50%)',
+            background: 'rgba(20,20,38,0.9)',
+            color: '#f0ebe3',
+            padding: '16px 28px',
+            borderRadius: '12px',
+            fontSize: '14px',
+            fontFamily: 'Inter, system-ui, sans-serif',
+            backdropFilter: 'blur(10px)',
+            border: '1px solid rgba(255,255,255,0.1)',
+            zIndex: 1000,
+            pointerEvents: 'none',
+            textAlign: 'center',
+            maxWidth: '500px',
+          }}
+        >
+          <div style={{ marginBottom: '8px', fontWeight: 600 }}>Welcome to my 3D Portfolio</div>
+          <div style={{ fontSize: '12px', opacity: 0.8 }}>
+            Click to enable controls • WASD to move • Mouse to look around
+            <br />
+            Click glowing objects to interact • ESC to exit • Press H to toggle this hint
           </div>
-          <span>Click glowing orbs to explore &bull; Drag to look around</span>
         </div>
       )}
-
-      {/* Content overlays */}
-      <Overlay activeId={activeOverlay} onClose={handleClose} />
     </div>
   )
 }
