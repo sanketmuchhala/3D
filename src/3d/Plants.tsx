@@ -49,8 +49,16 @@ function FloorPlant({ position }: { position: [number, number, number] }) {
 }
 
 function SmallPlant({ position }: { position: [number, number, number] }) {
+  const ref = useRef<THREE.Group>(null)
+  useFrame(({ clock }) => {
+    if (ref.current) {
+      ref.current.rotation.y = Math.sin(clock.getElapsedTime() * 0.3) * 0.02
+      ref.current.rotation.z = Math.cos(clock.getElapsedTime() * 0.25) * 0.01
+    }
+  })
+
   return (
-    <group position={position}>
+    <group position={position} ref={ref}>
       <mesh position={[0, 0.05, 0]} castShadow>
         <cylinderGeometry args={[0.05, 0.035, 0.1, 8]} />
         <meshStandardMaterial color="#3a3a3a" roughness={0.5} metalness={0.2} />
@@ -77,8 +85,16 @@ function SmallPlant({ position }: { position: [number, number, number] }) {
 }
 
 function HangingPlant({ position }: { position: [number, number, number] }) {
+  const ref = useRef<THREE.Group>(null)
+  useFrame(({ clock }) => {
+    if (ref.current) {
+      ref.current.rotation.x = Math.sin(clock.getElapsedTime() * 0.15) * 0.03
+      ref.current.rotation.z = Math.cos(clock.getElapsedTime() * 0.1) * 0.03
+    }
+  })
+
   return (
-    <group position={position}>
+    <group position={position} ref={ref}>
       <mesh position={[0, 0.12, 0]}>
         <cylinderGeometry args={[0.004, 0.004, 0.24, 4]} />
         <meshStandardMaterial color="#c0aa8a" roughness={0.9} />

@@ -1,6 +1,9 @@
+import { useCustomTextures } from './useCustomTextures'
+
 const colors = ['#2d4a7a', '#7a3b3b', '#3b7a4a', '#7a6b3b', '#5a3b7a', '#3b6a7a', '#7a3b5a', '#4a6a3b', '#6a4a3b', '#3b4a6a', '#8b6b4b', '#4b7a6b']
 
 export default function Bookshelf() {
+  const textures = useCustomTextures()
   const W = 0.9, D = 0.26, H = 2.0, T = 0.022
   const shelves = 5
   const gap = H / shelves
@@ -10,20 +13,20 @@ export default function Bookshelf() {
       {/* Side panels */}
       <mesh position={[-W / 2, H / 2, 0]} castShadow>
         <boxGeometry args={[T, H, D]} />
-        <meshStandardMaterial color="#a8835e" roughness={0.55} />
+        <meshStandardMaterial color="#a8835e" roughness={0.55} map={textures.wood} bumpMap={textures.wood} bumpScale={0.015} />
       </mesh>
       <mesh position={[W / 2, H / 2, 0]} castShadow>
         <boxGeometry args={[T, H, D]} />
-        <meshStandardMaterial color="#a8835e" roughness={0.55} />
+        <meshStandardMaterial color="#a8835e" roughness={0.55} map={textures.wood} bumpMap={textures.wood} bumpScale={0.015} />
       </mesh>
       <mesh position={[0, H / 2, -D / 2 + 0.005]}>
         <boxGeometry args={[W, H, 0.008]} />
-        <meshStandardMaterial color="#96784e" roughness={0.6} />
+        <meshStandardMaterial color="#96784e" roughness={0.6} map={textures.wood} />
       </mesh>
       {Array.from({ length: shelves + 1 }).map((_, i) => (
         <mesh key={i} position={[0, i * gap, 0]} castShadow receiveShadow>
           <boxGeometry args={[W - T, T, D]} />
-          <meshStandardMaterial color="#a8835e" roughness={0.55} />
+          <meshStandardMaterial color="#a8835e" roughness={0.55} map={textures.wood} bumpMap={textures.wood} bumpScale={0.015} />
         </mesh>
       ))}
       {/* Shelf 1 */}
@@ -80,6 +83,18 @@ export default function Bookshelf() {
       <mesh position={[-0.2, gap * 4.5, 0]} castShadow>
         <boxGeometry args={[0.07, gap - 0.14, 0.16]} />
         <meshStandardMaterial color="#4a6a7a" roughness={0.8} />
+      </mesh>
+
+      {/* Top of Bookshelf Decorative Items */}
+      {/* Vase */}
+      <mesh position={[-0.2, gap * 5 + 0.1, 0]} castShadow>
+        <cylinderGeometry args={[0.06, 0.04, 0.2, 16]} />
+        <meshStandardMaterial color="#e0d8cc" roughness={0.2} metalness={0.1} />
+      </mesh>
+      {/* Small Box */}
+      <mesh position={[0.2, gap * 5 + 0.05, 0]} rotation={[0, 0.2, 0]} castShadow>
+        <boxGeometry args={[0.15, 0.1, 0.15]} />
+        <meshStandardMaterial color="#8b6b4b" roughness={0.8} />
       </mesh>
     </group>
   )

@@ -1,5 +1,6 @@
 import { Suspense } from 'react'
-import { OrbitControls } from '@react-three/drei'
+import { OrbitControls, Environment } from '@react-three/drei'
+import { useFrame } from '@react-three/fiber'
 import Room from './Room'
 import Bed from './Bed'
 import Desk from './Desk'
@@ -10,11 +11,24 @@ import WallDecor from './WallDecor'
 
 // Temporarily using original scene structure
 // The new interaction system is ready but needs debugging
+function CameraAnimation() {
+  useFrame((state) => {
+    // Subtle breathing/floating effect for camera when idle
+    const t = state.clock.getElapsedTime()
+    state.camera.position.y += Math.sin(t * 0.5) * 0.001
+    state.camera.position.x += Math.cos(t * 0.3) * 0.0005
+    state.camera.updateProjectionMatrix()
+  })
+  return null
+}
+
 export default function Scene() {
   return (
     <>
+      <CameraAnimation />
       <Lighting />
       <Suspense fallback={null}>
+        <Environment preset="apartment" />
         <Room />
         <Bed />
         <Desk />
