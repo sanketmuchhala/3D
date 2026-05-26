@@ -3,58 +3,62 @@ const D = 6
 const H = 3
 const T = 0.1
 
+import { useCustomTextures } from './useCustomTextures'
+
 export default function Room() {
+  const textures = useCustomTextures()
+
   return (
     <group>
       {/* Floor */}
       <mesh rotation={[-Math.PI / 2, 0, 0]} receiveShadow>
         <planeGeometry args={[W, D]} />
-        <meshStandardMaterial color="#c4a882" roughness={0.5} metalness={0.05} />
+        <meshStandardMaterial color="#c4a882" roughness={0.5} metalness={0.05} map={textures.wood} bumpMap={textures.wood} bumpScale={0.02} />
       </mesh>
 
       {/* Ceiling */}
       <mesh rotation={[Math.PI / 2, 0, 0]} position={[0, H, 0]}>
         <planeGeometry args={[W, D]} />
-        <meshStandardMaterial color="#f2ede6" roughness={0.9} />
+        <meshStandardMaterial color="#f2ede6" roughness={0.9} map={textures.wall} />
       </mesh>
 
       {/* Back wall */}
       <mesh position={[0, H / 2, -D / 2]} receiveShadow>
         <boxGeometry args={[W, H, T]} />
-        <meshStandardMaterial color="#ece6dc" roughness={0.85} />
+        <meshStandardMaterial color="#ece6dc" roughness={0.85} map={textures.wall} bumpMap={textures.wall} bumpScale={0.003} />
       </mesh>
 
       {/* Left wall */}
       <mesh position={[-W / 2, H / 2, 0]} receiveShadow>
         <boxGeometry args={[T, H, D]} />
-        <meshStandardMaterial color="#ece6dc" roughness={0.85} />
+        <meshStandardMaterial color="#ece6dc" roughness={0.85} map={textures.wall} bumpMap={textures.wall} bumpScale={0.003} />
       </mesh>
 
       {/* Right wall */}
       <mesh position={[W / 2, H / 2, 0]} receiveShadow>
         <boxGeometry args={[T, H, D]} />
-        <meshStandardMaterial color="#ece6dc" roughness={0.85} />
+        <meshStandardMaterial color="#ece6dc" roughness={0.85} map={textures.wall} bumpMap={textures.wall} bumpScale={0.003} />
       </mesh>
 
       {/* Front wall — left chunk */}
       <mesh position={[-2.1, H / 2, D / 2]}>
         <boxGeometry args={[2.8, H, T]} />
-        <meshStandardMaterial color="#ece6dc" roughness={0.85} />
+        <meshStandardMaterial color="#ece6dc" roughness={0.85} map={textures.wall} bumpMap={textures.wall} bumpScale={0.003} />
       </mesh>
       {/* Front wall — right chunk */}
       <mesh position={[2.1, H / 2, D / 2]}>
         <boxGeometry args={[2.8, H, T]} />
-        <meshStandardMaterial color="#ece6dc" roughness={0.85} />
+        <meshStandardMaterial color="#ece6dc" roughness={0.85} map={textures.wall} bumpMap={textures.wall} bumpScale={0.003} />
       </mesh>
       {/* Front wall — above window */}
       <mesh position={[0, 2.6, D / 2]}>
         <boxGeometry args={[1.4, 0.8, T]} />
-        <meshStandardMaterial color="#ece6dc" roughness={0.85} />
+        <meshStandardMaterial color="#ece6dc" roughness={0.85} map={textures.wall} bumpMap={textures.wall} bumpScale={0.003} />
       </mesh>
       {/* Front wall — below window */}
       <mesh position={[0, 0.3, D / 2]}>
         <boxGeometry args={[1.4, 0.6, T]} />
-        <meshStandardMaterial color="#ece6dc" roughness={0.85} />
+        <meshStandardMaterial color="#ece6dc" roughness={0.85} map={textures.wall} bumpMap={textures.wall} bumpScale={0.003} />
       </mesh>
 
       {/* Window glass */}
@@ -77,24 +81,52 @@ export default function Room() {
         <meshStandardMaterial color="#d8d0c4" roughness={0.5} />
       </mesh>
 
+      {/* Window Frame Inner Depth */}
+      <mesh position={[-0.67, 1.55, D / 2 - 0.02]}>
+        <boxGeometry args={[0.04, 1.8, 0.06]} />
+        <meshStandardMaterial color="#ece6dc" roughness={0.8} />
+      </mesh>
+      <mesh position={[0.67, 1.55, D / 2 - 0.02]}>
+        <boxGeometry args={[0.04, 1.8, 0.06]} />
+        <meshStandardMaterial color="#ece6dc" roughness={0.8} />
+      </mesh>
+      <mesh position={[0, 2.47, D / 2 - 0.02]}>
+        <boxGeometry args={[1.38, 0.04, 0.06]} />
+        <meshStandardMaterial color="#ece6dc" roughness={0.8} />
+      </mesh>
+
       {/* Baseboards */}
       <mesh position={[0, 0.04, -D / 2 + 0.05]}>
         <boxGeometry args={[W, 0.08, 0.06]} />
-        <meshStandardMaterial color="#d0c8bc" roughness={0.6} />
+        <meshStandardMaterial color="#d0c8bc" roughness={0.6} map={textures.wood} />
       </mesh>
       <mesh position={[-W / 2 + 0.05, 0.04, 0]}>
         <boxGeometry args={[0.06, 0.08, D]} />
-        <meshStandardMaterial color="#d0c8bc" roughness={0.6} />
+        <meshStandardMaterial color="#d0c8bc" roughness={0.6} map={textures.wood} />
       </mesh>
       <mesh position={[W / 2 - 0.05, 0.04, 0]}>
         <boxGeometry args={[0.06, 0.08, D]} />
-        <meshStandardMaterial color="#d0c8bc" roughness={0.6} />
+        <meshStandardMaterial color="#d0c8bc" roughness={0.6} map={textures.wood} />
+      </mesh>
+
+      {/* Crown Molding */}
+      <mesh position={[0, H - 0.04, -D / 2 + 0.05]}>
+        <boxGeometry args={[W, 0.08, 0.06]} />
+        <meshStandardMaterial color="#d0c8bc" roughness={0.6} map={textures.wood} />
+      </mesh>
+      <mesh position={[-W / 2 + 0.05, H - 0.04, 0]}>
+        <boxGeometry args={[0.06, 0.08, D]} />
+        <meshStandardMaterial color="#d0c8bc" roughness={0.6} map={textures.wood} />
+      </mesh>
+      <mesh position={[W / 2 - 0.05, H - 0.04, 0]}>
+        <boxGeometry args={[0.06, 0.08, D]} />
+        <meshStandardMaterial color="#d0c8bc" roughness={0.6} map={textures.wood} />
       </mesh>
 
       {/* Area rug — under desk zone */}
       <mesh rotation={[-Math.PI / 2, 0, 0]} position={[-1.2, 0.003, -1.2]}>
         <planeGeometry args={[2.8, 2.2]} />
-        <meshStandardMaterial color="#cfc0ab" roughness={0.95} />
+        <meshStandardMaterial color="#cfc0ab" roughness={0.95} map={textures.carpet} bumpMap={textures.carpet} bumpScale={0.05} />
       </mesh>
 
       {/* Ceiling light */}

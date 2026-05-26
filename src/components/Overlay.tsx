@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react'
-import type { OverlayId } from '../App'
+
+export type OverlayId = 'about' | 'experience' | 'projects' | 'skills' | 'contact' | null;
 
 const aboutData = {
   summary: "AI/ML specialist with 3+ years developing scalable solutions in generative AI, LLMs, NLP, agentic systems, and document intelligence. Deployed production systems across insurance, esports, and enterprise analytics.",

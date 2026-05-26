@@ -1,5 +1,6 @@
 import { useRef } from 'react'
 import { useFrame } from '@react-three/fiber'
+import { SoftShadows } from '@react-three/drei'
 import * as THREE from 'three'
 
 export default function Lighting() {
@@ -10,10 +11,11 @@ export default function Lighting() {
 
   return (
     <>
-      <ambientLight intensity={0.3} color="#ffe8cc" />
+      <SoftShadows size={25} samples={10} focus={0.5} />
+      <ambientLight intensity={0.4} color="#ffe8cc" />
       <directionalLight
         position={[0, 4, 5]}
-        intensity={1.0}
+        intensity={1.2}
         color="#fff5e6"
         castShadow
         shadow-mapSize-width={1024}
@@ -26,12 +28,12 @@ export default function Lighting() {
         shadow-camera-far={12}
         shadow-bias={-0.001}
       />
-      <directionalLight position={[-3, 2, 0]} intensity={0.2} color="#e0d8f0" />
-      <pointLight ref={lampRef} position={[-1.5, 1.4, -2.2]} intensity={0.4} color="#ffcc88" distance={3.5} decay={2} />
-      <pointLight position={[1.05, 1.1, 1.15]} intensity={0.2} color="#ffe0b0" distance={2} decay={2} />
-      <pointLight position={[-1.5, 1.1, -2.4]} intensity={0.15} color="#6688cc" distance={1.8} decay={2} />
-      <pointLight position={[0, 2.85, 0]} intensity={0.25} color="#fff8f0" distance={5} decay={2} />
-      <hemisphereLight args={['#ffe8cc', '#c4a882', 0.2]} />
+      <directionalLight position={[-3, 2, 0]} intensity={0.3} color="#e0d8f0" />
+      <pointLight ref={lampRef} position={[-1.5, 1.4, -2.2]} intensity={0.6} color="#ffcc88" distance={4} decay={2} />
+      <pointLight position={[1.05, 1.1, 1.15]} intensity={0.3} color="#ffe0b0" distance={2.5} decay={2} />
+      <pointLight position={[-1.5, 1.1, -2.4]} intensity={0.2} color="#6688cc" distance={2} decay={2} />
+      <pointLight position={[0, 2.85, 0]} intensity={0.4} color="#fff8f0" distance={6} decay={2} />
+      <hemisphereLight args={['#ffe8cc', '#c4a882', 0.3]} />
     </>
   )
 }

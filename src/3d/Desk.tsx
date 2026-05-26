@@ -70,13 +70,17 @@ function Monitor({ position, rotation = [0, 0, 0] as [number, number, number], s
   )
 }
 
+import { useCustomTextures } from './useCustomTextures'
+
 export default function Desk() {
+  const textures = useCustomTextures()
+
   return (
     <group position={[-1.5, 0, -2.2]}>
       {/* Desktop */}
       <mesh position={[0, 0.74, 0]} castShadow receiveShadow>
         <boxGeometry args={[2.0, 0.035, 0.7]} />
-        <meshStandardMaterial color="#a8835e" roughness={0.5} />
+        <meshStandardMaterial color="#a8835e" roughness={0.5} map={textures.wood} bumpMap={textures.wood} bumpScale={0.015} />
       </mesh>
       <mesh position={[-0.9, 0.37, 0]} castShadow>
         <boxGeometry args={[0.035, 0.74, 0.55]} />
@@ -113,7 +117,7 @@ export default function Desk() {
       {/* Mouse + pad */}
       <mesh position={[0.32, 0.76, 0.15]} receiveShadow>
         <boxGeometry args={[0.22, 0.002, 0.2]} />
-        <meshStandardMaterial color="#1a1a1a" roughness={0.9} />
+        <meshStandardMaterial color="#1a1a1a" roughness={0.9} map={textures.fabric} bumpMap={textures.fabric} bumpScale={0.01} />
       </mesh>
       <mesh position={[0.32, 0.765, 0.15]} castShadow>
         <boxGeometry args={[0.05, 0.018, 0.08]} />
@@ -128,6 +132,44 @@ export default function Desk() {
       <mesh position={[-0.75, 0.79, 0.15]} rotation={[0, 0, Math.PI / 2]}>
         <torusGeometry args={[0.018, 0.004, 6, 12, Math.PI]} />
         <meshStandardMaterial color="#f0ebe3" roughness={0.8} />
+      </mesh>
+
+      {/* Desk Clutter */}
+      {/* Notebook */}
+      <mesh position={[-0.45, 0.76, 0.1]} rotation={[0, 0.2, 0]} castShadow>
+        <boxGeometry args={[0.15, 0.01, 0.2]} />
+        <meshStandardMaterial color="#2d4a7a" roughness={0.9} />
+      </mesh>
+      {/* Notebook Paper Pages */}
+      <mesh position={[-0.45, 0.762, 0.1]} rotation={[0, 0.2, 0]} castShadow>
+        <boxGeometry args={[0.14, 0.008, 0.19]} />
+        <meshStandardMaterial color="#f0f0f0" roughness={0.9} />
+      </mesh>
+
+      {/* Scattered Papers */}
+      <mesh position={[0.7, 0.76, 0.1]} rotation={[-Math.PI / 2, 0, -0.15]} castShadow>
+        <planeGeometry args={[0.2, 0.28]} />
+        <meshStandardMaterial color="#fafafa" roughness={0.9} />
+      </mesh>
+      <mesh position={[0.68, 0.761, 0.12]} rotation={[-Math.PI / 2, 0, 0.05]} castShadow>
+        <planeGeometry args={[0.2, 0.28]} />
+        <meshStandardMaterial color="#f4f4f4" roughness={0.9} />
+      </mesh>
+
+      {/* Pen */}
+      <mesh position={[-0.4, 0.766, 0.05]} rotation={[0, -0.4, 0]} castShadow>
+        <cylinderGeometry args={[0.003, 0.003, 0.12, 6]} />
+        <meshStandardMaterial color="#111" roughness={0.4} metalness={0.6} />
+      </mesh>
+
+      {/* Smartphone */}
+      <mesh position={[-0.75, 0.76, -0.05]} rotation={[0, 0.4, 0]} castShadow>
+        <boxGeometry args={[0.07, 0.006, 0.14]} />
+        <meshStandardMaterial color="#2a2a2a" roughness={0.3} metalness={0.8} />
+      </mesh>
+      <mesh position={[-0.75, 0.764, -0.05]} rotation={[-Math.PI / 2, 0, 0.4]}>
+        <planeGeometry args={[0.064, 0.134]} />
+        <meshStandardMaterial color="#000" roughness={0.1} emissive="#050510" emissiveIntensity={0.2} />
       </mesh>
 
       {/* Chair */}
